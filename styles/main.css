@@ -53,12 +53,7 @@ li:hover {
 a {
   display: block;
   text-decoration: none;
-  color: #eee;
+  color: #fff;
   font-size: 20px;
 }
-a:link {
-  color: #70996a;
-}
-a:hover {
-  color: #fff;
-}
+
