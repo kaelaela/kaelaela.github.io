@@ -5,36 +5,29 @@ body {
   font-family: 'Play', sans-serif;
   font-size: 18px;
   color: #888;
+  display: inline-block;
+  background-color: #022431;
 }
 .bio {
-  color: #888;
-}
-::selection {
-  background-color: #2ecc71;
-  color: #fff;
+  color: #aaa;
 }
 h2 {
   font-size: 32px;
   letter-spacing: -1px;
   font-weight: normal;
-  color: #555;
-}
-hr {
-  visibility: visible;
-  height: 1px;
-  width: 100%;
-  background-color: #eee;
+  color: #ddd;
 }
 li {
   margin: 10px;
 }
-li:hover {
+a:hover {
   -webkit-color: 0 0 10px #bb8;
-  color: #888;
+  color: #aaa;
+  text-decoration: underline;
 }
 a {
   display: block;
   text-decoration: none;
-  color: #888;
+  color: #aaa;
   font-size: 20px;
 }
