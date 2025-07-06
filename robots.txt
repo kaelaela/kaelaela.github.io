@@ -1,2 +1,8 @@
 User-agent: *
 Allow: /
+
+# Sitemap
+Sitemap: https://kaelaela.github.io/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1
