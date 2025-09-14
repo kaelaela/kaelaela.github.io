@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post</title>
+    <link rel="stylesheet" href="/blog/styles/blog.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/blog/">← ブログ一覧に戻る</a>
+        </nav>
+    </header>
+    
+    <main>
+        <article id="content">
+            <!-- マークダウンコンテンツがここに表示されます -->
+        </article>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 kaelae.la</p>
+    </footer>
+    
+    <script>
+        // URLからマークダウンファイルのパスを取得
+        const urlParams = new URLSearchParams(window.location.search);
+        const postFile = urlParams.get('post');
+        
+        if (postFile) {
+            fetch(`/blog/posts/${postFile}`)
+                .then(response => response.text())
+                .then(markdown => {
+                    // マークダウンをHTMLに変換
+                    const html = marked.parse(markdown);
+                    document.getElementById('content').innerHTML = html;
+                    
+                    // タイトルを取得して設定
+                    const h1 = document.querySelector('h1');
+                    if (h1) {
+                        document.title = h1.textContent + ' - Blog';
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('content').innerHTML = '<p>記事が見つかりませんでした。</p>';
+                });
+        } else {
+            document.getElementById('content').innerHTML = '<p>記事が指定されていません。</p>';
+        }
+    </script>
+</body>
+</html>

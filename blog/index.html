@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - kaelae.la</title>
+    <link rel="stylesheet" href="/blog/styles/blog.css">
+</head>
+<body>
+    <header>
+        <h1>Blog</h1>
+        <nav>
+            <a href="/">ホームに戻る</a>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="posts">
+            <h2>記事一覧</h2>
+            <div id="post-list">
+                <!-- 記事リストがここに表示されます -->
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 kaelae.la</p>
+    </footer>
+    
+    <script>
+        // posts.jsonファイルから記事リストを読み込む
+        fetch('/blog/posts.json')
+            .then(response => response.json())
+            .then(posts => {
+                const postList = document.getElementById('post-list');
+                
+                if (posts.length === 0) {
+                    postList.innerHTML = '<p>記事がまだありません。</p>';
+                    return;
+                }
+                
+                const ul = document.createElement('ul');
+                ul.className = 'post-list';
+                
+                posts.forEach(post => {
+                    const li = document.createElement('li');
+                    li.className = 'post-item';
+                    
+                    const link = document.createElement('a');
+                    link.href = `/blog/post-template.html?post=${post.file}`;
+                    link.className = 'post-link';
+                    
+                    const title = document.createElement('h3');
+                    title.textContent = post.title;
+                    
+                    const date = document.createElement('time');
+                    date.textContent = post.date;
+                    date.className = 'post-date';
+                    
+                    const description = document.createElement('p');
+                    description.textContent = post.description;
+                    description.className = 'post-description';
+                    
+                    link.appendChild(title);
+                    link.appendChild(date);
+                    link.appendChild(description);
+                    li.appendChild(link);
+                    ul.appendChild(li);
+                });
+                
+                postList.appendChild(ul);
+            })
+            .catch(error => {
+                document.getElementById('post-list').innerHTML = '<p>記事の読み込みに失敗しました。</p>';
+            });
+    </script>
+</body>
+</html>
